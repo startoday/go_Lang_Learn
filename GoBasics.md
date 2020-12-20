@@ -37,7 +37,7 @@ Go is a compile language but has some good things of inteperate language, for ex
 
 5. pointer:
     - & operator returns the address of a var/function 
-    - * operator returns data at an address(dereferencing)
+    - “ * ”   operator returns data at an address(dereferencing)
     - eg: 
     ```
           var x int = 1 
