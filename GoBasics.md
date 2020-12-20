@@ -105,3 +105,7 @@ const x = 1.3
 - switch ( a multiway if statements) => no "break" needed for each case!!! no cascading!!!
   
   
+14. scan
+- Scan reads user input
+- Takes a pointer as an argument
+- Typed data is written to pointer
