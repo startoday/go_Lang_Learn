@@ -35,6 +35,24 @@ Go is a compile language but has some good things of inteperate language, for ex
 - uninitialized vars have a zero val:  var x int // x = 0 ; var x string // x = ""
 - short var declaration:  x := 100   ":=" operator   => can only do this inside a function
 
+5. pointer:
+    - & operator returns the address of a var/function 
+    - * operator returns data at an address(dereferencing)
+    - eg: 
+    ```
+          var x int = 1 
+          var y int 
+          var ip * int // ip is an int pointer
+          ip = &x // ip now points to x
+          y = * ip  // y is now 1
+    ```
+    - new() return a pointer to the var that created
+    ```
+          ptr := new(int)
+          *ptr = 3  // set the value as 3
+    ```
 
+6. variable scope
+- blocks: {} / universe block -all Go source  / Package block - all source in a package/ File block -all source in a file
 
-  
+7. int8, int16, int32,uint8,uint16...你可以specify size 但也可以交给compiler解决by just use int！
