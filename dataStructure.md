@@ -11,6 +11,18 @@
 - capacity is the max number of eles    cap(sli)
 - sli := [] int{1,2,3}  // this doesn't have ... in [] , so compiler will think we want the slice, will create an array first, then it makes a slice point to the whole array
 
+        ```
+        func main() {
+          x := [...]int {4, 8, 5}
+          y := x[0:2]
+          z := x[1:3]
+          y[0] = 1
+          z[1] = 3
+          fmt.Print(x)  //will change x = [1,8,3] instead of [4,8,5]
+        }
+        ```
+
+
 3. when you just want to have a slice ( the size is variable, don't want a fixed size, and you don't care about the underlying array)
 can use make() to create it
 
