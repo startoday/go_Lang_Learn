@@ -109,3 +109,18 @@ const x = 1.3
 - Scan reads user input
 - Takes a pointer as an argument
 - Typed data is written to pointer
+
+15. RFCs (requests for comments| remote function calls)
+- protocals such as HTTP, URI, you can just import pacakges to use 
+
+16. JSON
+- turn some other object into Json called JSON marshalling
+   
+   barr, err :=json.Marshal(p1) //p1 is a Person struct; barr is a []byte
+   
+   err := json.Unmarshal(barr, &p2) // var p2 Person 
+   
+   
+17. Files
+- ioutil packag: readfile will read the whole things, so it is not good to read a large file
+- os package: os.open() os.close() 
