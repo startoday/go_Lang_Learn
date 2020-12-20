@@ -48,5 +48,6 @@ can use make() to create it
       p1.name = "Kai"
      ```
       
- 
+ - initialize fileds to zero:  p1 := new(Person)
+ - initialzie: p1 := Person(name: "j", addr:"x.st", phone:"123")
 
