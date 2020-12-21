@@ -59,6 +59,19 @@
 		  fmt.Println(Dist1(2,2)) //Sqrt(2)
       fmt.Println(Dist2(2,2)) //Sqrt(8)
     }
+    
+    func fA() func() int {
+	    i := 0
+	    return func() int {
+		i++
+		return i
+	    }
+    }
+   func main() {
+	   fB := fA()
+	   fmt.Println(fB()) //1
+	   fmt.Println(fB()) //2
+   }
   ``` 
 9. closure
 - when functions are passes/returned, their environment comes with them! just like the example in 8
