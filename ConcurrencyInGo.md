@@ -10,4 +10,6 @@
 - mapping from tasks to hardware is not directly controlled by the programmer （not in go at least!)
 - reason of using it: hiding latency!
 
+3. Process
+- things unique to process: memory - virtual address space, code, stack, heap...; registers-program counter, data regs, stack ptr
 
