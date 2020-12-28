@@ -58,5 +58,71 @@
 - channels are typed
 - use make() to create a channel =>  c := make(chan int)
 - send data: c<-3   receive data from a channel x := <- c
+  ```
+    package main
+    import "fmt"
 
-  
+    func prod( v1, v2 int, c chan int) { c <- v1 *v2}
+    func main(){
+      c := make(chan int)
+      go prod(1, 2, c)
+      go prod(3, 4, c)
+      a := <- c
+      b := <- c
+      fmt.Println(a*b) //24
+    }
+  ```
+9. blocking channels
+- channel is default as unbuffered channel. which means it can NOT hold data in transit
+- sending blokcings until data is received, eg A received 3, and it will blocked, hold until this data is received - receiving blocks until data is sent
+- this means the channel is doing synchronization
+
+10. buffered channel
+- block is usually a bad thing, will reduce the concurrency
+- default size is 0; but we can set the size in make. eg: c:= make(chan int, 3)
+- sending only blocks if buffer is full
+- receiving only blocks if buffer is empty
+   ```
+    package main
+    import "fmt"
+
+    func prod( v1, v2 int, c chan int) { c <- v1 *v2}
+    func main(){
+      c := make(chan int, 3)
+      go prod(1, 2, c)
+      go prod(3, 4, c)
+      fmt.Println(<- c * <- c) //24
+    }
+   ```
+
+11. iterating through a channle
+   ```
+    for i : = range c{ fmt.Println(i)}  // it will continue to read from channel c; one iteration each time a new value is received; infinite loop
+    // iterates end when sender calls close(c)
+   ```
+
+12. receiving from multiple goroutines
+- may have a choice of which data to use, first come first seved => use **select**
+```
+  select{
+    case a = <- c1:
+      fmt.Println(a)
+     case b = <- c2:
+      fmt.Println(b)
+     case outchan <- c:
+      fmt.Println("sent c")   // you can select both send and receive; which ever comes first will be picked
+     default:
+      fmt.Println("nope")   // use a default to avoid blocking
+  }
+```
+- select with an Abort channel; there is a seperate abort channel; will receive data until an abort signal is received ( don't care which is sent)
+```
+  for{
+    select{
+      case a = <- c1:
+        fmt.Println(a)
+       case  <- abort:
+        return
+    }
+  }
+```
