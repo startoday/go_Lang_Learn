@@ -13,3 +13,50 @@
 3. Process
 - things unique to process: memory - virtual address space, code, stack, heap...; registers-program counter, data regs, stack ptr
 
+4. Goroutines
+- like a thread in Go
+- Many Goroutines execute within a single OS thread
+
+5. Go Runtime Scheduler
+- like a little OS inside a single  OS thread
+- programmer can determine how many logical processors that are going to be used
+
+6. create a goroutine
+- one goroutine is created automatically to execute the main()
+- other goroutines are created using the **go** key word
+  ```
+    a = 1
+    foo()   // main goroutine blocks on call to foo()
+    a = 2
+  ```
+  with goroutine
+  ```
+    a = 1
+    go foo()   // new goroutine blocks create foo(), main goroutine does not block
+    a = 2
+  ```
+- if main finish first, then you may not able to see goroutine finish （early exit)
+
+7. wait group
+- add() increments the counter; done() decrements the counter; wait() blocks until counter == 0
+  ```
+  func foo(wg * sync.WaitGroup){
+    fmt.Printf("New routine")
+    wg.Done()
+  }
+  func main(){
+    var wg sync.WaitGroup
+    wg.Add(1)
+    go foo(&wg)
+    wg.Wait()
+    fmt.Print("Main routine)
+  }
+  ```
+  
+8. channels
+- communicatuiion through goroutines are using channels
+- channels are typed
+- use make() to create a channel =>  c := make(chan int)
+- send data: c<-3   receive data from a channel x := <- c
+
+  
