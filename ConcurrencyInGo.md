@@ -126,3 +126,35 @@
     }
   }
 ```
+
+13. mutex (mutual exclusive)
+- use binary semaphore
+- lock() : shared variable in use
+- unlock(): Done using shared variable, next one in waitinglist of lock() will use the variable
+- if all the goroutines have the lock() at beginning and unlock() at the end it will ensures that only one of these goroutines can be inside this region
+```
+  var i int = 0
+  var mut sync.Mutex
+  func inc(){
+    mut.Lock()
+    i = i + 1
+    mut.Unlock()
+  }
+```
+
+14. synchronus initialization
+- must happen once and happen before everything else
+- Sync.Once.Do(f) : if you put it into all goroutines, it can ensures initialize only once, and block until the first one is returned ( all goroutine initialize one thing once)
+  ```
+    var on sync.Once
+    func setup(){fmt.Println("Init"}
+    func dostuff(){
+      on.Do(setup)
+      fmt.Println("Hello")
+      wg.Done()
+    }
+    
+  ```
+15. deadlock
+- circular dependencies
+- goroutines can detect the deadlock when all the goroutines are deadlocked, but it can't detects when subsets of goroutines are deadlocked
